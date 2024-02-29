@@ -2,7 +2,7 @@
 #include <random>
 #include <iostream>
 #include <sstream>
-#include <fstream>
+#include <fstream> 
 
 //#include "../heap.h" //bring in your heap implementation
 #include "../heap.h"
@@ -108,6 +108,13 @@ bool Circuit::parse(const char* fname)
                     std::string s_output;
                     getline(ss, s_output, ',');
                     m_gates.push_back(new Or2Gate(m_wires[stoi(s_in1)], m_wires[stoi(s_in2)], m_wires[stoi(s_output)]));
+                }
+                if (s_type == "NOT") {
+                    std::string s_input;
+                    getline(ss, s_input, ',');
+                    std::string s_output;
+                    getline(ss, s_output, ',');
+                    m_gates.push_back(new NotGate(m_wires[stoi(s_input)], m_wires[stoi(s_output)]));
                 }
                 //Add code here to support the NOT gate type
             }
@@ -217,4 +224,19 @@ void Circuit::startUml(std::ostream& os)
 void Circuit::endUml(std::ostream& os)
 {
     os << "@enduml" << std::endl;
+}
+
+NotGate::NotGate(Wire* input, Wire* output) : Gate(m_delay, output) {
+    m_inputs.push_back(input);
+}
+
+Event* NotGate::update(uint64_t time) {
+    char newState = 'X'; // Undefined by default
+    if (m_inputs[0]->getState() == '0') newState = '1';
+    else if (m_inputs[0]->getState() == '1') newState = '0';
+
+    if (newState != m_output->getState()) {
+        return new Event{time, m_output, newState};
+    }
+    return nullptr;
 }

@@ -82,12 +82,22 @@ int main(int argc, char* argv[])
     // Feel free to update any code below this point
     // -----------------------------------------------
     Node* head = readList(argv[1]);
+    Node* smaller = NULL;
+    Node* larger = NULL;
     cout << "Original list: ";
     print(head);
+    llpivot(head, smaller, larger, 7);
+    cout << "smaller list: ";
+    print(smaller);
+    cout << "larger list: ";
+    print(larger);
+
 
     // Test out your linked list code
 
-
+dealloc(head); // If head still has nodes, though it should be NULL after llpivot
+dealloc(smaller);
+dealloc(larger);
 
     
     return 0;

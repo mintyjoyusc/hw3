@@ -15,7 +15,12 @@ public:
    *          as an argument and returns a bool if the first argument has
    *          priority over the second.
    */
-  Heap(int m=2, PComparator c = PComparator());
+    Heap(int m = 2, PComparator c = PComparator()) : arity(m), comp(c) {
+        if (m < 2) {
+            throw std::invalid_argument("Heap arity must be at least 2");
+        }
+    }
+
 
   /**
   * @brief Destroy the Heap object
@@ -28,7 +33,10 @@ public:
    * 
    * @param item item to heap
    */
-  void push(const T& item);
+    void push(const T& item) {
+        data.push_back(item);
+        upHeap(data.size() - 1);
+    }
 
   /**
    * @brief Returns the top (priority) item
@@ -36,14 +44,27 @@ public:
    * @return T const& top priority item
    * @throw std::underflow_error if the heap is empty
    */
-  T const & top() const;
+    T const & top() const {
+        if (empty()) {
+            throw std::underflow_error("Heap is empty");
+        }
+        return data[0];
+    }
+
 
   /**
    * @brief Remove the top priority item
    * 
    * @throw std::underflow_error if the heap is empty
    */
-  void pop();
+    void pop() {
+        if (empty()) {
+            throw std::underflow_error("Heap is empty");
+        }
+        data[0] = data.back();
+        data.pop_back();
+        downHeap(0);
+    }
 
   /// returns true if the heap is empty
 
@@ -51,17 +72,59 @@ public:
    * @brief Returns true if the heap is empty
    * 
    */
-  bool empty() const;
+    bool empty() const {
+      return data.empty();
+    }
 
     /**
    * @brief Returns size of the heap
    * 
    */
-  size_t size() const;
-
+    size_t size() const {
+        return data.size();
+    }
 private:
   /// Add whatever helper functions and data members you need below
+    std::vector<T> data;
+    int arity;
+    PComparator comp;
 
+    void upHeap(size_t childIndex) {
+        while (childIndex > 0) {
+            size_t parentIndex = (childIndex - 1) / arity;
+            if (comp(data[childIndex], data[parentIndex])) {
+                std::swap(data[childIndex], data[parentIndex]);
+                childIndex = parentIndex;
+            } else {
+                break;
+            }
+        }
+    }
+
+    void downHeap(size_t parentIndex) {
+        while (true) {
+            size_t minChildIndex = parentIndex * arity + 1;
+            if (minChildIndex >= data.size()) {
+                break; // No children
+            }
+
+            // Find the minimum (or maximum, depending on the comparator) among the children
+            size_t endIndex = std::min(minChildIndex + arity, data.size());
+            for (size_t i = minChildIndex + 1; i < endIndex; ++i) {
+                if (comp(data[i], data[minChildIndex])) {
+                    minChildIndex = i;
+                }
+            }
+
+            // If the parent is greater (or less, depending on the comparator) than the min (or max) child, swap them
+            if (comp(data[minChildIndex], data[parentIndex])) {
+                std::swap(data[parentIndex], data[minChildIndex]);
+                parentIndex = minChildIndex;
+            } else {
+                break; // The heap property is satisfied
+            }
+        }
+    }
 
 
 

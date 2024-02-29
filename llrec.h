@@ -3,7 +3,7 @@
 #ifndef NULL
 #define NULL 0
 #endif
-
+ 
 /**
  * Node struct for both problems
  */
@@ -77,12 +77,42 @@ Node* llfilter(Node* head, Comp pred);
 // implement the above function now.
 //*****************************************************************************
 
+// struct Node
+// {
+//     int val;
+//     Node *next;
+
+//     Node(int v, Node* n) : val(v), next(n) {}
+// };
+
 template <typename Comp>
 Node* llfilter(Node* head, Comp pred)
 {
     //*********************************************
     // Provide your implementation below
     //*********************************************
+        // Base case: if the list is empty, return NULL
+    if (head == NULL)
+    {
+        return NULL;
+    }
+
+    // Recursively filter the rest of the list
+    head->next = llfilter(head->next, pred);
+
+    // Now decide what to do with the current (head) node
+    if (pred(head->val))
+    {
+        // If the current node matches the predicate, it should be removed
+        Node* temp = head->next; // Save the next node
+        delete head; // Delete the current node
+        return temp; // Return the next node as the new head of the list
+    }
+    else
+    {
+        // If the current node does not match the predicate, keep it
+        return head; // Return the current node as the head of the list
+    }
 
 
 }
