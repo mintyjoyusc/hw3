@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/work/hw3/hw3_tests/testing_utils/misc_utils.cpp
+/home/codio/workspace/hw3/hw3_tests/testing_utils/misc_utils.cpp
 misc_utils.h
-/work/hw3/hw3_tests/testing_utils/misc_utils.h
+/home/codio/workspace/hw3/hw3_tests/testing_utils/misc_utils.h
 sys/resource.h
 -
 iostream
@@ -18,7 +18,7 @@ sstream
 cstring
 -
 
-/work/hw3/hw3_tests/testing_utils/misc_utils.h
+/home/codio/workspace/hw3/hw3_tests/testing_utils/misc_utils.h
 string
 -
 vector
@@ -28,13 +28,13 @@ set
 sstream
 -
 
-/work/hw3/hw3_tests/testing_utils/random_generator.cpp
+/home/codio/workspace/hw3/hw3_tests/testing_utils/random_generator.cpp
 random_generator.h
-/work/hw3/hw3_tests/testing_utils/random_generator.h
+/home/codio/workspace/hw3/hw3_tests/testing_utils/random_generator.h
 limits
 -
 
-/work/hw3/hw3_tests/testing_utils/random_generator.h
+/home/codio/workspace/hw3/hw3_tests/testing_utils/random_generator.h
 random
 -
 vector
@@ -46,7 +46,7 @@ string
 cstdint
 -
 
-/work/hw3/hw3_tests/testing_utils/rang.h
+/home/codio/workspace/hw3/hw3_tests/testing_utils/rang.h
 unistd.h
 -
 windows.h
@@ -66,11 +66,11 @@ cstring
 iostream
 -
 
-/work/hw3/hw3_tests/testing_utils/user_code_runner.cpp
+/home/codio/workspace/hw3/hw3_tests/testing_utils/user_code_runner.cpp
 user_code_runner.h
-/work/hw3/hw3_tests/testing_utils/user_code_runner.h
+/home/codio/workspace/hw3/hw3_tests/testing_utils/user_code_runner.h
 rang.h
-/work/hw3/hw3_tests/testing_utils/rang.h
+/home/codio/workspace/hw3/hw3_tests/testing_utils/rang.h
 iostream
 -
 sstream
@@ -80,7 +80,7 @@ fstream
 kwsys/SystemTools.hxx
 -
 
-/work/hw3/hw3_tests/testing_utils/user_code_runner.h
+/home/codio/workspace/hw3/hw3_tests/testing_utils/user_code_runner.h
 string
 -
 vector

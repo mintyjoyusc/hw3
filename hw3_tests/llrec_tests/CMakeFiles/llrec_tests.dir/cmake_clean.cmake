@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/llrec_tests.dir/llrec_test_utils.cpp.o"
   "CMakeFiles/llrec_tests.dir/llrec_tests.cpp.o"
-  "llrec_tests"
+  "CMakeFiles/llrec_tests.dir/llrec_test_utils.cpp.o"
   "llrec_tests.pdb"
+  "llrec_tests"
 )
 
 # Per-language clean rules from dependency scanning.

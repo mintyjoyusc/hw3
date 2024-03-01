@@ -1,5 +1,6 @@
 #ifndef HEAP_H
 #define HEAP_H
+#include <vector>
 #include <functional>
 #include <stdexcept>
 
@@ -26,7 +27,7 @@ public:
   * @brief Destroy the Heap object
   * 
   */
-  ~Heap();
+  ~Heap() = default;
 
   /**
    * @brief Push an item to the heap
@@ -44,27 +45,14 @@ public:
    * @return T const& top priority item
    * @throw std::underflow_error if the heap is empty
    */
-    T const & top() const {
-        if (empty()) {
-            throw std::underflow_error("Heap is empty");
-        }
-        return data[0];
-    }
-
+    T const & top() const;
 
   /**
    * @brief Remove the top priority item
    * 
    * @throw std::underflow_error if the heap is empty
    */
-    void pop() {
-        if (empty()) {
-            throw std::underflow_error("Heap is empty");
-        }
-        data[0] = data.back();
-        data.pop_back();
-        downHeap(0);
-    }
+    void pop();
 
   /// returns true if the heap is empty
 
@@ -141,6 +129,7 @@ T const & Heap<T,PComparator>::top() const
   // Here we use exceptions to handle the case of trying
   // to access the top element of an empty heap
   if(empty()){
+    throw std::underflow_error("Heap is empty");
     // ================================
     // throw the appropriate exception
     // ================================
@@ -149,7 +138,7 @@ T const & Heap<T,PComparator>::top() const
   }
   // If we get here we know the heap has at least 1 item
   // Add code to return the top element
-
+    return data[0];
 
 
 }
@@ -161,6 +150,8 @@ template <typename T, typename PComparator>
 void Heap<T,PComparator>::pop()
 {
   if(empty()){
+    throw std::underflow_error("Heap is empty");
+
     // ================================
     // throw the appropriate exception
     // ================================
@@ -168,7 +159,9 @@ void Heap<T,PComparator>::pop()
 
   }
 
-
+    data[0] = data.back();
+    data.pop_back();
+    downHeap(0);
 
 }
 
